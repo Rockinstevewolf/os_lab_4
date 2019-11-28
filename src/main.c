@@ -9,7 +9,7 @@ int sum(int a){
     if(a!=1){
         pid_t pid;
         int pipe_1[2], pipe_2[2], res=0, buff_a = a-1;
-        if((pipe(pipe_1) == -1) || (pipe(pipe_2) == -1)){
+        if((pipe(pipe_1) == -1)){
         	write(STDERR_FILENO, "ERROR: pipe\n", sizeof "ERROR: pipe\n" - 1);
         	exit(EXIT_FAILURE);
         }
@@ -21,9 +21,7 @@ int sum(int a){
             int status;
             wait(&status);
             printf(">>%i\n", WEXITSTATUS(status));
-            close(pipe_2[1]);
-            read(pipe_2[0], &res, sizeof(res));
-            close(pipe_2[0]);
+            res = WEXITSTATUS(status);
             return res+a;
         }
         else if(pid < 0){
@@ -36,10 +34,7 @@ int sum(int a){
             read(pipe_1[0], &get, sizeof(get));
             close(pipe_1[0]);
             get = sum(get);
-            close(pipe_2[0]);
-            write(pipe_2[1], &get, sizeof(get));
-            close(pipe_2[1]);
-            exit(42);
+            exit(get);
         }
     }
     else

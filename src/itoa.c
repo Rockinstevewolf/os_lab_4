@@ -1,7 +1,7 @@
 #include "itoa.h"
 
 int itoa(int n, char *s){//Возвращает длину строки
-	int k, sign;
+	int k = 0, sign;
 	int i, j;
 	char c;
 	if((sign = n) < 0)

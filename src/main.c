@@ -21,10 +21,7 @@ char* sum(char* map){
         int len = itoa(buff_a, buff_map); 
         pid = fork();
         if(pid > 0){    //Родитель
-            int status;
-            wait(&status);
-            //printf(">>%i\n", WEXITSTATUS(status));
-            //res = WEXITSTATUS(status);
+            wait(0);
             res = atoi(map) + a;
             itoa(res, map);
             return map;
@@ -34,9 +31,7 @@ char* sum(char* map){
         	exit(EXIT_FAILURE);
         }
         else{   //Ребенок
-            //int get = readFromFile("in");
             map = sum(map);
-            //exit(get);
             exit(0);
         }
     }

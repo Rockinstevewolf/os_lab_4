@@ -48,7 +48,7 @@ char* sum(char* map){
 int main()
 {
     char *map;//, string[17];
-    map = mmap(0, 17, PROT_READ | PROT_WRITE, MAP_ANONYMOUS, -1, 0);
+    map = mmap(0, 17, PROT_READ | PROT_WRITE, MAP_SHARED |  MAP_ANONYMOUS, -1, 0);
     int n = 0;
     printf("Enter a sequence number: ");
     scanf("%d", &n);
@@ -58,7 +58,6 @@ int main()
         printf("there\n");
         int len = itoa(n, map);
         printf("there\n");
-        //strcpy(map, string);
         printf("%d\n", atoi(sum(map)));
     }
     return 0;

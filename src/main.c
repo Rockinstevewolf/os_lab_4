@@ -18,7 +18,6 @@ char* sum(char* map){
         pid_t pid;
         int res, buff_a = a - 1;
         char *buff_map = map;
-        //writeToFile("in", buff_a);
         int len = itoa(buff_a, buff_map); 
         pid = fork();
         if(pid > 0){    //Родитель
@@ -47,7 +46,7 @@ char* sum(char* map){
 
 int main()
 {
-    char *map;//, string[17];
+    char *map;
     map = mmap(0, 17, PROT_READ | PROT_WRITE, MAP_SHARED |  MAP_ANONYMOUS, -1, 0);
     int n = 0;
     printf("Enter a sequence number: ");
